@@ -18,6 +18,9 @@ import OrderPlaced from "./pages/orderPlaced"
 import MyOrders from "./pages/myOrders"
 import useGetMyOrders from "./hooks/useGetMyOrders"
 import Shop from './pages/shop'
+import axios from "axios";
+axios.defaults.withCredentials = true;
+
 
 
 export const serverUrl = "https://kisan-setu-backend-9x9d.onrender.com"
