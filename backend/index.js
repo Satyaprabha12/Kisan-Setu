@@ -4,6 +4,7 @@ dotenv.config();
 console.log('Environment loaded:');
 console.log('RAZORPAY_KEY_ID:', process.env.RAZORPAY_KEY_ID ? '✅' : '❌');
 console.log('NODE_ENV:', process.env.NODE_ENV);
+
 import e from "express";
 import connectDB from "./config/db.js";
 import cookieParser from "cookie-parser";
@@ -20,7 +21,7 @@ const PORT = process.env.PORT || 8000
 app.use(e.json())
 app.use(cookieParser())
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "https://kisansetu-frontend-dj4j.onrender.com",
     credentials: true
 }))
 app.use("/api/auth", authRouter)
