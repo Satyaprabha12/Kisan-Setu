@@ -8,6 +8,11 @@ function useGetShopByCity() {
     const dispatch=useDispatch()
     const {currentCity}=useSelector(state=>state.user)
   useEffect(()=>{
+    if (!currentCity) {
+            console.log("City not ready yet, skipping shop fetch.");
+            return;
+        }
+        
   const fetchShops=async () => {
     try {
            const result=await axios.get(`${serverUrl}/api/shop/get-by-city/${currentCity}`,{withCredentials:true})
@@ -17,9 +22,7 @@ function useGetShopByCity() {
         console.log(error)
     }
 }
-if (!currentCity) return;
 fetchShops()
-
  
   },[currentCity])
 }
