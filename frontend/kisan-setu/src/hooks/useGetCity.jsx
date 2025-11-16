@@ -35,7 +35,8 @@ function useGetCity() {
       dispatch(setLocation({ lat: latitude, lon: longitude }))
 
       const result = await axios.get(
-        `https://api.geoapify.com/v1/geocode/reverse?lat=${latitude}&lon=${longitude}&format=json&apiKey=${apiKey}`
+        `https://api.geoapify.com/v1/geocode/reverse?lat=${latitude}&lon=${longitude}&format=json&apiKey=${apiKey}`,
+        { withCredentials: false }
       )
 
       console.log(result.data)
