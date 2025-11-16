@@ -20,7 +20,7 @@ import useGetMyOrders from "./hooks/useGetMyOrders"
 import Shop from './pages/shop'
 
 
-export const serverUrl = "https://kisansetu-backend-7a9z.onrender.com"
+export const serverUrl = "https://kisan-setu-backend-9x9d.onrender.com"
 
 
 function App() {
