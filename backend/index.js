@@ -19,10 +19,13 @@ const app = e();
 
 const PORT = process.env.PORT || 8000
 app.use(e.json())
+app.use(e.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(cors({
     origin: "https://kisansetu-frontend-dj4j.onrender.com",
-    credentials: true
+    credentials: true,
+     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    allowedHeaders: ["Content-Type", "Authorization"]
 }))
 app.use("/api/auth", authRouter)
 app.use("/api/user", userRouter)
