@@ -40,11 +40,19 @@ function useGetCity() {
       )
 
       console.log(result.data)
-      dispatch(
-        setCurrentCity(
-          result?.data?.results[0].city || result?.data?.results[0].county
-        )
-      )
+
+      let city =
+          result?.data?.results[0]?.city ||
+          result?.data?.results[0]?.county ||
+          null
+
+        if (city === "Mumbai") city = "Navi Mumbai"
+        if (city === "Raigad") city = "Navi Mumbai"
+        if (city === "Thane") city = "Navi Mumbai"
+        if (city === "Thane District") city = "Navi Mumbai"
+        if (!city) city = "Navi Mumbai"
+
+      dispatch(setCurrentCity(city))
       dispatch(setCurrentState(result?.data?.results[0].state))
       dispatch(
         setCurrentAddress(
@@ -53,7 +61,14 @@ function useGetCity() {
         )
       )
       dispatch(setAddress(result?.data?.results[0].address_line2))
-    })
+    },
+    (error) => {
+        console.log("Geolocation Error:", error);
+       
+        dispatch(setCurrentCity("Navi Mumbai"));
+      },
+      { enableHighAccuracy: true }
+  )
   }, [userData])
 }
 
