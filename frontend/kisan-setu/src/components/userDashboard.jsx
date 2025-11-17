@@ -49,7 +49,7 @@ function UserDashboard() {
       setUpdatedItemsList(itemsInMyCity);
     } else {
       const filteredList = itemsInMyCity?.filter(
-        (i) => i.category === category
+        (i) => i.category?.toLowerCase().includes(category.toLowerCase())
       );
       setUpdatedItemsList(filteredList);
     }
