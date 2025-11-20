@@ -1,81 +1,82 @@
-import banner1 from "../assets/user-banner.jpg";
-import banner2 from "../assets/user-banner2.jpg";
-import banner3 from "../assets/user-banner3.avif";
-import banner4 from "../assets/user-banner4.jpg";
-import { useEffect, useRef, useState } from "react";
-import Nav from "./nav";
-import { categories } from "../category";
-import CategoryCard from "./categoryCard";
-import { FaCircleChevronLeft } from "react-icons/fa6";
-import { FaCircleChevronRight } from "react-icons/fa6";
-import { useSelector } from "react-redux";
-import FoodCard from "./foodCard";
+import banner1 from "../assets/user-banner.jpg"
+import banner2 from "../assets/user-banner2.jpg"
+import banner3 from "../assets/user-banner3.avif"
+import banner4 from "../assets/user-banner4.jpg"
+import { useEffect, useRef, useState } from "react"
+import Nav from "./nav"
+import { categories } from "../category"
+import CategoryCard from "./categoryCard"
+import { FaCircleChevronLeft } from "react-icons/fa6"
+import { FaCircleChevronRight } from "react-icons/fa6"
+import { useSelector } from "react-redux"
+import FoodCard from "./foodCard"
 import aboutImg from "../assets/aboutimg.jpg"
-import { AiTwotoneMail } from "react-icons/ai";
-import { FaPhoneVolume } from "react-icons/fa6";
-import { IoLocationSharp } from "react-icons/io5";
-import { FaFacebook } from "react-icons/fa6";
-import { FaTwitter } from "react-icons/fa";
-import { GrInstagram } from "react-icons/gr";
-import { BsLinkedin } from "react-icons/bs";
-import { FaArrowUp } from "react-icons/fa";
+import { AiTwotoneMail } from "react-icons/ai"
+import { FaPhoneVolume } from "react-icons/fa6"
+import { IoLocationSharp } from "react-icons/io5"
+import { FaFacebook } from "react-icons/fa6"
+import { FaTwitter } from "react-icons/fa"
+import { GrInstagram } from "react-icons/gr"
+import { BsLinkedin } from "react-icons/bs"
+import { FaArrowUp } from "react-icons/fa"
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
 
 function UserDashboard() {
   const { currentCity, shopInMyCity, itemsInMyCity, searchItems, userData } =
-    useSelector((state) => state.user);
-  const cateScrollRef = useRef();
-  const shopScrollRef = useRef();
-  const navigate = useNavigate();
-  const [showLeftCateButton, setShowLeftCateButton] = useState(false);
-  const [showRightCateButton, setShowRightCateButton] = useState(false);
-  const [showLeftShopButton, setShowLeftShopButton] = useState(false);
-  const [showRightShopButton, setShowRightShopButton] = useState(false);
-  const [updatedItemsList, setUpdatedItemsList] = useState([]);
-  const banners = [banner1, banner2, banner3, banner4];
-  const [currentIndex, setCurrentIndex] = useState(0);
+    useSelector((state) => state.user)
+  const cateScrollRef = useRef()
+  const shopScrollRef = useRef()
+  const navigate = useNavigate()
+  const [showLeftCateButton, setShowLeftCateButton] = useState(false)
+  const [showRightCateButton, setShowRightCateButton] = useState(false)
+  const [showLeftShopButton, setShowLeftShopButton] = useState(false)
+  const [showRightShopButton, setShowRightShopButton] = useState(false)
+  const [updatedItemsList, setUpdatedItemsList] = useState([])
+  const banners = [banner1, banner2, banner3, banner4]
+  const [currentIndex, setCurrentIndex] = useState(0)
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % banners.length);
-    }, 3000);
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % banners.length)
+    }, 3000)
 
-    return () => clearInterval(interval);
-  }, [banners.length]);
+    return () => clearInterval(interval)
+  }, [banners.length])
 
   const handleFilterByCategory = (category) => {
     if (category == "All") {
-      setUpdatedItemsList(itemsInMyCity);
+      setUpdatedItemsList(itemsInMyCity)
     } else {
       const filteredList = itemsInMyCity?.filter(
-        (i) => i.itemType?.toLowerCase()=== category.toLowerCase()
-      );
-      setUpdatedItemsList(filteredList);
+        (i) => i.category?.toLowerCase().includes(category.toLowerCase())
+      )
+      console.log("Filtered List:", filteredList)
+      setUpdatedItemsList(filteredList)
     }
-  };
+  }
 
   useEffect(() => {
-    setUpdatedItemsList(itemsInMyCity);
-  }, [itemsInMyCity]);
+    setUpdatedItemsList(itemsInMyCity)
+  }, [itemsInMyCity])
 
   const updateButton = (ref, setLeftButton, setRightButton) => {
-    const element = ref.current;
+    const element = ref.current
     if (element) {
-      setLeftButton(element.scrollLeft > 0);
+      setLeftButton(element.scrollLeft > 0)
       setRightButton(
         element.scrollLeft + element.clientWidth < element.scrollWidth
-      );
+      )
     }
-  };
+  }
   const scrollHandler = (ref, direction) => {
     if (ref.current) {
       ref.current.scrollBy({
         left: direction == "left" ? -200 : 200,
         behavior: "smooth",
-      });
+      })
     }
-  };
+  }
 
   useEffect(() => {
     if (cateScrollRef.current) {
@@ -83,26 +84,26 @@ function UserDashboard() {
         cateScrollRef,
         setShowLeftCateButton,
         setShowRightCateButton
-      );
+      )
       updateButton(
         shopScrollRef,
         setShowLeftShopButton,
         setShowRightShopButton
-      );
+      )
       cateScrollRef.current.addEventListener("scroll", () => {
         updateButton(
           cateScrollRef,
           setShowLeftCateButton,
           setShowRightCateButton
-        );
-      });
+        )
+      })
       shopScrollRef.current.addEventListener("scroll", () => {
         updateButton(
           shopScrollRef,
           setShowLeftShopButton,
           setShowRightShopButton
-        );
-      });
+        )
+      })
     }
 
     return () => {
@@ -111,17 +112,17 @@ function UserDashboard() {
           cateScrollRef,
           setShowLeftCateButton,
           setShowRightCateButton
-        );
-      });
+        )
+      })
       shopScrollRef?.current?.removeEventListener("scroll", () => {
         updateButton(
           shopScrollRef,
           setShowLeftShopButton,
           setShowRightShopButton
-        );
-      });
-    };
-  }, [categories]);
+        )
+      })
+    }
+  }, [categories])
 
   return (
     <div className="w-screen min-h-screen flex flex-col gap-5 items-center overflow-y-auto">
@@ -197,7 +198,7 @@ function UserDashboard() {
 
       <div className="w-full max-w-6xl flex flex-col gap-5 items-start p-2.5">
         <h1 className="text-gray-800 text-2xl font-serif font-bold sm:text-3xl">
-          Best Shop in {currentCity}
+          Best Farmers Shop in {currentCity}
         </h1>
         <div className="w-full relative">
           {showLeftShopButton && (
@@ -296,7 +297,7 @@ function UserDashboard() {
 </footer>
 
     </div>
-  );
+  )
 }
 
-export default UserDashboard;
+export default UserDashboard
