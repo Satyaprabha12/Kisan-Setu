@@ -45,7 +45,7 @@ function UserDashboard() {
   }, [banners.length])
 
   const handleFilterByCategory = (category) => {
-    if (category == "All") {
+    if (category === "All") {
       setUpdatedItemsList(itemsInMyCity)
     } else {
       const filteredList = itemsInMyCity?.filter(
@@ -240,7 +240,7 @@ function UserDashboard() {
         </h1>
 
         <div className="w-full h-auto flex flex-wrap gap-5 justify-center">
-          {itemsInMyCity?.map((item, index) => (
+          {updatedItemsList?.map((item, index) => (
             <FoodCard key={index} data={item} />
           ))}
         </div>
