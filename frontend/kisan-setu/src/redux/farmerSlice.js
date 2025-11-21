@@ -4,7 +4,8 @@ const farmerSlice = createSlice({
     name: "farmer",
     initialState: {
         myShopData:null,
-        myShopOrders: []
+        myShopOrders: [],
+        newOrdersCount:0,
     },
     reducers:{
         setMyShopData:(state,action)=>{
@@ -12,6 +13,9 @@ const farmerSlice = createSlice({
         },
         setMyShopOrders: (state, action) => {
       state.myShopOrders = action.payload;
+    },
+    setNewOrdersCount: (state, action) => {
+      state.newOrdersCount = action.payload
     },
     updateOrderStatus: (state, action) => {
       const { orderId, shopId, status } = action.payload;
@@ -24,5 +28,5 @@ const farmerSlice = createSlice({
 
 })
 
-export const {setMyShopData, setMyShopOrders, updateOrderStatus }=farmerSlice.actions
+export const {setMyShopData, setMyShopOrders, updateOrderStatus, setNewOrdersCount }=farmerSlice.actions
 export default farmerSlice.reducer

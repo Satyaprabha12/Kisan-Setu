@@ -275,7 +275,24 @@ export const updateOrderStatus = async (req, res) => {
   } catch (error) {
     return res.status(500).json({ message: `update status error: ${error}` });
   }
-};
+}
+
+export const getNewOrdersCount = async (req, res) => {
+  try {
+    const farmerId = req.user._id
+    
+    const count = await Order.countDocuments({
+      shopOwner: farmerId,
+      status: { $in: ["pending", "preparing", "out of delivery", "delivered"] }
+    })
+    
+    res.json({ count })
+  } catch (error) {
+    console.error("Error fetching new orders count:", error)
+    res.status(500).json({ message: error.message })
+  }
+}
+
 
 
 

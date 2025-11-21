@@ -18,7 +18,7 @@ function Nav() {
   const { userData, currentCity} = useSelector(state=>state.user)
   const searchItems = useSelector(state => state.user.searchItems)
   const cartItems = useSelector(state => state.user.cartItems)
-  const {myShopData}=useSelector(state=>state.farmer)
+  const {myShopData, newOrdersCount}=useSelector(state=>state.farmer)
   const [showInfo, setShowInfo] = useState(false)
   const [showSearch, setShowSearch] = useState(false)
   const [query, setQuery] = useState("")
@@ -105,12 +105,12 @@ function Nav() {
               onClick={()=>navigate("/my-orders")}>
               <TbReceipt2 size={20}/>
               <span>My Orders</span>
-              <span className="absolute -right-2 -top-2 text-xs font-bold text-white bg-orange-400 rounded-full px-1.5 py-px">0</span>
+              {newOrdersCount>0 && (<span className="absolute -right-2 -top-2 text-xs font-bold text-white bg-orange-400 rounded-full px-1.5 py-px">{newOrdersCount}</span>)}
               </div>
               <div className="md:hidden flex items-center gap-2 cursor-pointer relative px-3 py-1 rounded-lg bg-white/50 text-orange-400 font-medium"
               onClick={()=>navigate("/my-orders")}>
               <TbReceipt2 size={20}/>
-              <span className="absolute -right-2 -top-2 text-xs font-bold text-white bg-orange-400 rounded-full px-1.5 py-px">0</span>
+              {newOrdersCount>0 && (<span className="absolute -right-2 -top-2 text-xs font-bold text-white bg-orange-400 rounded-full px-1.5 py-px">{newOrdersCount}</span>)}
               </div>
               </>)}
               
