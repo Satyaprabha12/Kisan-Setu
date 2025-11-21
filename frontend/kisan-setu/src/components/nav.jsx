@@ -65,7 +65,7 @@ function Nav() {
             </div>
             <div className="flex items-center gap-1 px-3 h-full w-[80%]">
             <IoMdSearch size={20} className="text-orange-500" />
-            <input type="text" placeholder="Search Groceries..." className="px-2 outline-0 w-full"/>
+            <input type="text" placeholder="Search Groceries..." className="px-2 outline-0 w-full" value={query} onChange={(e)=> setQuery(e.target.value)}/>
             <button className="bg-orange-500 text-white px-4 py-2 rounded-lg" onClick={handleSearch} type="button">Search</button>
             </div>
             </div>}
@@ -80,7 +80,7 @@ function Nav() {
             </div>
             <div className="flex items-center gap-1 px-3 h-full w-[80%]">
             <IoMdSearch size={20} className="text-orange-500" />
-            <input type="text" placeholder="Search Groceries..." className="px-2 outline-0 w-full"/>
+            <input type="text" placeholder="Search Groceries..." className="px-2 outline-0 w-full" value={query} onChange={(e)=> setQuery(e.target.value)}/>
             <button className="bg-orange-500 text-white px-4 py-2 rounded-lg" onClick={handleSearch} type="button">Search</button>
             </div>
             </div>}
