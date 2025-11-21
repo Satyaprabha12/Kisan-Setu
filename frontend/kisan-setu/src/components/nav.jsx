@@ -128,8 +128,8 @@ function Nav() {
             </div>
             {showInfo && <div className="fixed top-18 right-3 md:right-[10%] lg:right-[2%] w-[180px] bg-white shadow-2xl rounded-xl p-5 flex flex-col gap-3 z-9999">
               <div className="text-lg font-semibold">{userData?.user?.fullName || "Guest"}</div>
-              <div className="md:hidden font-semibold cursor-pointer text-orange-400"
-              onClick={()=>navigate("/my-orders")}>View Cart</div>
+              {userData?.user?.role==="user" && (<div className="md:hidden font-semibold cursor-pointer text-orange-400"
+              onClick={()=>navigate("/my-orders")}>View Cart</div>)}
               <div className="text-sm text-gray-500 cursor-pointer" onClick={handleLogout}>Log Out</div>
             </div>}
             </div>
