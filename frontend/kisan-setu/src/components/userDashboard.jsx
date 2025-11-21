@@ -253,8 +253,7 @@ function UserDashboard() {
         </p>
       </section>
 
-      {/* Contact Section */}
-      <footer className="w-full max-w-full p-5 mt-10 bg-black rounded-lg shadow-md flex flex-col md:flex-row justify-between items-center gap-6">
+      <footer className="w-full max-w-full p-5 mt-10 bg-black rounded-t-lg shadow-md flex flex-col md:flex-row justify-between items-center gap-6">
         <div>
          <h2 className="text-4xl font-serif font-semibold mb-4 text-orange-400">Contact Us</h2>
   <ul className="list-disc list-inside text-white/80 leading-relaxed space-y-2">
@@ -286,7 +285,6 @@ function UserDashboard() {
 
     <span className="text-2xl text-orange-500 font-semibold font-serif mb-3">Get Connect with Us</span>
     <div className="flex gap-4 text-white cursor-pointer text-2xl">
-      {/* Replace these icons with your preferred React icons */}
       <FaFacebook size={30} className="text-gray-300 hover:scale-110 hover:text-blue-600 transition" />
       <FaTwitter size={30} className="text-gray-300 hover:scale-110 hover:text-blue-400 transition" />
       <GrInstagram size={30}  className="text-gray-300 hover:scale-110 hover:text-pink-500 transition" />
