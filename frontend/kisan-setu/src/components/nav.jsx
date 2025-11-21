@@ -20,7 +20,30 @@ function Nav() {
   const {myShopData}=useSelector(state=>state.farmer)
   const [showInfo, setShowInfo] = useState(false)
   const [showSearch, setShowSearch] = useState(false)
+  const [query, setQuery] = useState("")
   const dispatch=useDispatch()
+
+  const handleSearch = async () => {
+  console.log("Search triggered for query:", query)
+
+  if (!query.trim()) {
+    dispatch(setSearchItems([]))
+    return
+  }
+
+  try {
+    const result = await axios.get(`${serverUrl}/api/item/search-items?query=${query}&city=${currentCity}`, 
+      console.log("serverUrl =", serverUrl),
+      { withCredentials: true }
+    )
+
+    const data = Array.isArray(result.data) ? result.data : (result.data ? [result.data] : [])
+    dispatch(setSearchItems(data))
+  } catch (error) {
+    console.error("Search failed:", error)
+    dispatch(setSearchItems([]))
+  }
+}
   const navigate = useNavigate()
 
   const handleLogout=async()=>{
@@ -43,7 +66,7 @@ function Nav() {
             <div className="flex items-center gap-1 px-3 h-full w-[80%]">
             <IoMdSearch size={20} className="text-orange-500" />
             <input type="text" placeholder="Search Groceries..." className="px-2 outline-0 w-full"/>
-            <button className="bg-orange-500 text-white px-4 py-2 rounded-lg">Search</button>
+            <button className="bg-orange-500 text-white px-4 py-2 rounded-lg" onClick={handleSearch} type="button">Search</button>
             </div>
             </div>}
 
@@ -58,7 +81,7 @@ function Nav() {
             <div className="flex items-center gap-1 px-3 h-full w-[80%]">
             <IoMdSearch size={20} className="text-orange-500" />
             <input type="text" placeholder="Search Groceries..." className="px-2 outline-0 w-full"/>
-            <button className="bg-orange-500 text-white px-4 py-2 rounded-lg">Search</button>
+            <button className="bg-orange-500 text-white px-4 py-2 rounded-lg" onClick={handleSearch} type="button">Search</button>
             </div>
             </div>}
         
