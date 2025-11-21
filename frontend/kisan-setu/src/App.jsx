@@ -4,7 +4,7 @@ import SignUp from "./pages/signUp"
 import { useGetCurrentUser } from "./hooks/useGetCurrentUser"
 import  useGetCity  from "./hooks/useGetCity"
 import { useGetMyShop } from "./hooks/useGetMyShop"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import Home from "./pages/home"
 import { Navigate } from "react-router-dom"
 import CreateEditShop from './pages/createEditShop'
@@ -18,13 +18,14 @@ import OrderPlaced from "./pages/orderPlaced"
 import MyOrders from "./pages/myOrders"
 import useGetMyOrders from "./hooks/useGetMyOrders"
 import Shop from './pages/shop'
-import axios from "axios";
-axios.defaults.withCredentials = true;
+import axios from "axios"
+import { setNewOrdersCount } from "./redux/farmerSlice"
+import { useEffect } from "react"
 
+axios.defaults.withCredentials = true
 
 
 export const serverUrl = "https://kisan-setu-backend-9x9d.onrender.com"
-
 
 function App() {
   useGetCurrentUser()
@@ -34,7 +35,33 @@ function App() {
   useGetItemsByCity()
   useGetMyOrders()
 
-  const {userData} = useSelector(state=> state.user)
+  const dispatch = useDispatch()
+  const { userData } = useSelector(state => state.user)
+  const { myShopData } = useSelector(state => state.farmer)
+
+  useEffect(() => {
+    const fetchOrdersCount = async () => {
+      
+      if (userData?.user?.role === 'farmer' && myShopData) {
+        try {
+          const result = await axios.get(
+            `${serverUrl}/api/order/farmer/new-orders-count`,
+            { withCredentials: true }
+          )
+          dispatch(setNewOrdersCount(result.data.count))
+        } catch (error) {
+          console.error('Failed to fetch orders count:', error)
+        }
+      }
+    }
+
+    fetchOrdersCount()
+
+    const interval = setInterval(fetchOrdersCount, 30000)
+
+    return () => clearInterval(interval)
+  }, [userData, myShopData, dispatch])
+
   return (
     <Routes>
      <Route path="/signup" element={!userData ? <SignUp /> : <Navigate to="/" />} />
