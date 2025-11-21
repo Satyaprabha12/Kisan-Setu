@@ -1,0 +1,1 @@
+export const serverUrl = "https://kisan-setu-backend-9x9d.onrender.com"
