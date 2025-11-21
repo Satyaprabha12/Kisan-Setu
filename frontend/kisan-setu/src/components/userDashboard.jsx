@@ -265,7 +265,7 @@ function UserDashboard() {
         </p>
       </section>
 
-      <footer className="w-full max-w-full p-5 mt-10 bg-black rounded-lg shadow-md flex flex-col md:flex-row justify-between items-center gap-6">
+      <footer className="w-full max-w-full p-5 mt-10 bg-black rounded-t-lg shadow-md flex flex-col md:flex-row justify-between items-center gap-6">
         <div>
           <h2 className="text-4xl font-serif font-semibold mb-4 text-orange-400">Contact Us</h2>
           <ul className="list-disc list-inside text-white/80 leading-relaxed space-y-2">
