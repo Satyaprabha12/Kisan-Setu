@@ -6,7 +6,7 @@ import { useSelector } from "react-redux"
 import { useState } from "react"
 import { RxCross2 } from "react-icons/rx"
 import  serverUrl  from "../App"
-import { setUserData } from "../redux/userSlice"
+import { setUserData, setSearchItems } from "../redux/userSlice"
 import axios from "axios"
 import { useDispatch } from "react-redux"
 import { FaPlus } from "react-icons/fa"
@@ -16,7 +16,8 @@ import { useNavigate } from "react-router-dom"
 function Nav() {
 
   const { userData, currentCity} = useSelector(state=>state.user)
-  const cartItems = useSelector(state => state.user.cartItems); 
+  const searchItems = useSelector(state => state.user.searchItems)
+  const cartItems = useSelector(state => state.user.cartItems)
   const {myShopData}=useSelector(state=>state.farmer)
   const [showInfo, setShowInfo] = useState(false)
   const [showSearch, setShowSearch] = useState(false)
