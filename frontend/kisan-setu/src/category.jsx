@@ -11,6 +11,6 @@ export const categories = [
     { "category": "vegetables", "image": veges },
     { "category": "fruits", "image": fruits },
     { "category": "dairy", "image": dairy },
-    { "category": "grains", "image": grains },
+    { "category": "grain", "image": grains },
     { "category": "meat", "image": meat },
 ]
